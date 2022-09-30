@@ -34,6 +34,11 @@ function askQuestion() {
 
 //Function to check user answer chosen by user, count, and show result
 function checkAnswer() {
+    if(answerChosen )
+
+    if (countDown > 0){
+        askQuestion();
+    }
 
 }
 
@@ -50,6 +55,7 @@ function saveScore() {
 
 //Function to Display Top Scores
 function highScores() {
+    
 
 }
 
