@@ -7,6 +7,8 @@ var timer;
 var countDown;
 var correctAnswerCount = 0;
 
+
+
 //Function to begin quiz when button is clicked, calls timer and question functions
 function startQuiz() {
     countDown = 60;
@@ -51,7 +53,9 @@ function checkAnswer() {
 
 //Function to show quiz score at the end of timer
 function finalScore() {
+    
 
+    saveScore();
 }
 
 //Function for user input prompt for Initials to save score
@@ -59,7 +63,15 @@ function saveScore() {
     var initials = prompt("Enter your initials to save your score!");
     if(initials === null) {
         saveScore()
-    }
+    };
+
+    var scoreRecord = {
+    initials: initials.value,
+    score: score.value
+    };
+
+    localStorage.setItem("scoreRecord", JSON.stringify(scoreRecord))
+
     highScores();
 }
 
