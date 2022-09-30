@@ -3,9 +3,6 @@ var startButton = document.querySelector(".start-button");
 var countDownElement = document.querySelector(".count-down");
 var mainDiv = document.querySelector(".main-div")
 
-var timer;
-var countDown;
-var correctAnswerCount = 0;
 var questions = [
     {
         question: "Commonly used data types DO NOT include: ",
@@ -33,6 +30,10 @@ var questions = [
         correctAnswer: "c. Quotes",
     },
 ];
+
+var timer;
+var countDown;
+var correctAnswerCount = 0;
 var q = 0;
 var quizQuestion = questions[q];
 
@@ -49,10 +50,6 @@ function startTime() {
     timer = setInterval(function() {
         countDown--;
         countDownElement.textContent = countDown;
-        if (countDown === 0) {
-            clearInterval(timer);
-            finalScore();
-        }
     }, 1000)
 
 }
@@ -60,8 +57,9 @@ function startTime() {
 //Function to display question and answers to choose from and calls function to check answer
 function askQuestion() {
     
-    if(q <= questions.length) {
+    if(q < questions.length) {
        mainDiv.innerHTML = "<h1>"+quizQuestion.question+"</h1>";
+       console.log(questions)
        //Create buttons with answers
        for (let i = 0; i < quizQuestion.answerOpt.length; i++) {
             var answerBtns = document.createElement("button");
@@ -72,7 +70,8 @@ function askQuestion() {
        
     }
     else {
-        countDown = 0
+        countDown = 0;
+        
         finalScore()
     }
     // checkAnswer(answerChosen);
@@ -84,22 +83,19 @@ function checkAnswer() {
 
     if(answerChosen === quizQuestion.correctAnswer) {
         correctAnswerCount++;
-        console.log(answerChosen);
-        console.log(correctAnswerCount);
         q++;
-        console.log(q)
-        console.log(questions.length)
-        mainDiv.textContent = ""
+        
         askQuestion();
     }
     else{
-        // if(countDown >= 10){
-        // countDown - 10;}
-        // else{
-        //     countDown = 0
-        // }
+        if(countDown >= 10){
+        countDown = countDown - 10;}
+        else{
+            countDown = 0
+            finalScore()
+        }
         q++;
-        console.log(answerChosen);
+        quizQuestion = questions[q];
         askQuestion();
     }
 
@@ -107,8 +103,8 @@ function checkAnswer() {
 
 //Function to show quiz score at the end of timer
 function finalScore() {
-    alert
-
+    alert("Here is your final score: "+ correctAnswerCount)
+    clearInterval(timer);
     saveScore();
 }
 
