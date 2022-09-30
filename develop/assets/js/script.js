@@ -7,7 +7,33 @@ var timer;
 var countDown;
 var correctAnswerCount = 0;
 
-
+var questions = [
+    {
+        question: "Commonly used data types DO NOT include: ",
+        answerOpt: [],
+        correctAnswer: "",
+    },
+    {
+        question: "",
+        answerOpt: [],
+        correctAnswer: "",
+    },
+    {
+        question: "",
+        answerOpt: [],
+        correctAnswer: "",
+    },
+    {
+        question: "",
+        answerOpt: [],
+        correctAnswer: "",
+    },
+    {
+        question: "",
+        answerOpt: [],
+        correctAnswer: "",
+    }
+]
 
 //Function to begin quiz when button is clicked, calls timer and question functions
 function startQuiz() {
@@ -31,7 +57,18 @@ function startTime() {
 
 //Function to display question and answers to choose from and calls function to check answer
 function askQuestion() {
-    mainDiv.innerHTML = "<h1>"+ +"</h1>";
+    q = 0
+    var quizQuestion = questions[q]
+    
+    if(q <= questions.length) {
+       mainDiv.innerHTML = "<h1>"+quizQuestion.question+"</h1>";
+       for (let i = 0; i < quizQuestion.answerOpt.length; i++) {
+        const element = array[i];
+        
+       }
+
+    }
+    
     checkAnswer(answerChosen);
 }
 
