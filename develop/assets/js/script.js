@@ -10,28 +10,28 @@ var correctAnswerCount = 0;
 var questions = [
     {
         question: "Commonly used data types DO NOT include: ",
-        answerOpt: [],
-        correctAnswer: "",
+        answerOpt: ["a. Strings", "b. Booleans", "c. Alerts", "d. Numbers"],
+        correctAnswer: "c. Alerts",
     },
     {
-        question: "",
-        answerOpt: [],
-        correctAnswer: "",
+        question: "The condition in an if/else statement is enclosed with _______.",
+        answerOpt: ["a. Quotes", "b. Curly brackets", "c. Parenthesis", "d. Square brackets"],
+        correctAnswer: "c. Parenthesis",
     },
     {
-        question: "",
-        answerOpt: [],
-        correctAnswer: "",
+        question: "Arrays in Javascript can be used to store _______.",
+        answerOpt: ["a. Numbers and Strings", "b. Other arrays", "c. Booleans","d. All of the above" ],
+        correctAnswer: "d. All of the above",
     },
     {
-        question: "",
-        answerOpt: [],
-        correctAnswer: "",
+        question: "A very useful tool used during development and debugging for printing content to the debugger ",
+        answerOpt: ["a. Javascript", "b. Terminal/Bash", "c. for loops", "d. console.log"],
+        correctAnswer: "d. console.log",
     },
     {
-        question: "",
-        answerOpt: [],
-        correctAnswer: "",
+        question: "String values must be enclosed ",
+        answerOpt: ["a. Commas", "b. Curly brackets", "c. Quotes", "d. Parenthesis"],
+        correctAnswer: "c. Quotes",
     }
 ]
 
