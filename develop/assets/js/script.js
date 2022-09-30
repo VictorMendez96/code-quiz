@@ -6,7 +6,6 @@ var mainDiv = document.querySelector(".main-div")
 var timer;
 var countDown;
 var correctAnswerCount = 0;
-
 var questions = [
     {
         question: "Commonly used data types DO NOT include: ",
@@ -32,8 +31,11 @@ var questions = [
         question: "String values must be enclosed ",
         answerOpt: ["a. Commas", "b. Curly brackets", "c. Quotes", "d. Parenthesis"],
         correctAnswer: "c. Quotes",
-    }
-]
+    },
+];
+var q = 0;
+var quizQuestion = questions[q];
+
 
 //Function to begin quiz when button is clicked, calls timer and question functions
 function startQuiz() {
@@ -57,32 +59,47 @@ function startTime() {
 
 //Function to display question and answers to choose from and calls function to check answer
 function askQuestion() {
-    q = 0
-    var quizQuestion = questions[q]
     
     if(q <= questions.length) {
        mainDiv.innerHTML = "<h1>"+quizQuestion.question+"</h1>";
+       //Create buttons with answers
        for (let i = 0; i < quizQuestion.answerOpt.length; i++) {
-        const element = array[i];
-        
+            var answerBtns = document.createElement("button");
+            answerBtns.textContent = quizQuestion.answerOpt[i];
+            answerBtns.addEventListener("click", checkAnswer);
+            mainDiv.appendChild(answerBtns);
        }
-
+       
     }
-    
-    checkAnswer(answerChosen);
+    else {
+        countDown = 0
+        finalScore()
+    }
+    // checkAnswer(answerChosen);
 }
 
 //Function to check user answer chosen by user, count, and show result
 function checkAnswer() {
-    if(answerChosen === correctAnswer) {
+    var answerChosen = this.textContent
+
+    if(answerChosen === quizQuestion.correctAnswer) {
         correctAnswerCount++;
+        console.log(answerChosen);
+        console.log(correctAnswerCount);
+        q++;
+        console.log(q)
+        console.log(questions.length)
+        mainDiv.textContent = ""
+        askQuestion();
     }
-
-    if(answerChosen != correctAnswer) {
-        countDown - 10;
-    }
-
-    if (countDown > 0){
+    else{
+        // if(countDown >= 10){
+        // countDown - 10;}
+        // else{
+        //     countDown = 0
+        // }
+        q++;
+        console.log(answerChosen);
         askQuestion();
     }
 
@@ -90,7 +107,7 @@ function checkAnswer() {
 
 //Function to show quiz score at the end of timer
 function finalScore() {
-    
+    alert
 
     saveScore();
 }
@@ -98,18 +115,19 @@ function finalScore() {
 //Function for user input prompt for Initials to save score
 function saveScore() {
     var initials = prompt("Enter your initials to save your score!");
-    if(initials === null) {
+    if(!initials) {
         saveScore()
     };
-
+    
     var scoreRecord = {
-    initials: initials.value,
-    score: score.value
+    initials: initials,
+    score: correctAnswerCount,
     };
 
     localStorage.setItem("scoreRecord", JSON.stringify(scoreRecord))
 
     highScores();
+    
 }
 
 //Function to Display Top Scores
