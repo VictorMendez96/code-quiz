@@ -2,6 +2,7 @@
 var startButton = document.querySelector(".start-button");
 var countDownElement = document.querySelector(".count-down");
 var mainDiv = document.querySelector(".main-div")
+var scoresBtn = document.querySelector(".scores-button")
 
 var questions = [
     {
@@ -84,7 +85,7 @@ function checkAnswer() {
     if(answerChosen === quizQuestion.correctAnswer) {
         correctAnswerCount++;
         q++;
-        
+        quizQuestion = questions[q];
         askQuestion();
     }
     else{
@@ -128,17 +129,21 @@ function saveScore() {
 
 //Function to Display Top Scores
 function highScores() {
+    mainDiv.innerHTML = "<h1>Leaderboard</h1>";
     
-
+    var backBtn = document.createElement("button")
+    backBtn.textContent = "Go Back"
+    backBtn.addEventListener("click", reset)
+    mainDiv.appendChild(backBtn)
 }
 
 //Event Listener for start button 
 startButton.addEventListener("click", startQuiz)
 
-//Init function, to triggers when the webpage is loaded
-function init() {
-    
-}
+//Event Listener for View High Scores Button
+scoresBtn.addEventListener("click", highScores)
 
-//Calls init() function when page loads
-init();
+//Init function, to triggers when the webpage is loaded
+function reset() {
+    document.location.reload()
+}
