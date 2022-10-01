@@ -37,7 +37,7 @@ var countDown;
 var correctAnswerCount = 0;
 var q = 0;
 var quizQuestion = questions[q];
-
+var scoreRecord = [];
 
 //Function to begin quiz when button is clicked, calls timer and question functions
 function startQuiz() {
@@ -116,12 +116,16 @@ function saveScore() {
         saveScore()
     };
     
-    var scoreRecord = {
+    var userInfo = {
     initials: initials,
     score: correctAnswerCount,
     };
 
-    localStorage.setItem("scoreRecord", JSON.stringify(scoreRecord))
+    scoreRecord.push(userInfo);
+    scoreRecord = scoreRecord.concat(JSON.parse(localStorage.getItem("scoreRecord")||'[]'));
+    console.log(scoreRecord)
+
+    localStorage.setItem("scoreRecord", JSON.stringify())
 
     highScores();
     
@@ -131,10 +135,24 @@ function saveScore() {
 function highScores() {
     mainDiv.innerHTML = "<h1>Leaderboard</h1>";
     
-    var backBtn = document.createElement("button")
-    backBtn.textContent = "Go Back"
-    backBtn.addEventListener("click", reset)
-    mainDiv.appendChild(backBtn)
+    scoreRecord = JSON.parse(localStorage.getItem("scoreRecord")||'[]');
+
+    scoreRecord.sort((a, b) => b.score - a.score);
+
+    var leaderboard = document.createElement("ol")
+    
+
+    scoreRecord.forEach((Element) => {
+        var user = document.createElement("li");
+        user.textContent = `${Element.initials}, Score: ${Element.score}`;
+        leaderboard.appendChild(user);
+        
+    })
+    mainDiv.append(leaderboard)
+    var backBtn = document.createElement("button");
+    backBtn.textContent = "Go Back";
+    backBtn.addEventListener("click", reset);
+    mainDiv.appendChild(backBtn);
 }
 
 //Event Listener for start button 
