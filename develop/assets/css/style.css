@@ -1,0 +1,41 @@
+header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+
+}
+
+main {
+    display: flex;
+    justify-content: center;
+    align-content: space-between;
+    align-items: center;
+    text-align: center;
+}
+
+button {
+    text-align: center;
+    transition-duration: 0.4s; 
+    background-color: lightgreen;
+    border: none;
+    border-radius: 8px;
+    font-size: 20px;
+    padding: 25px 25px 25px 25px;
+}
+
+button:hover {
+    background-color: green;
+    color: white;
+    box-shadow: 0 12px 16px 0 rgba(0,0,0,0.24), 0 17px 50px 0 rgba(0,0,0,0.19);
+    
+}
+
+.timer {
+    display: flex;
+    align-items: flex-end;
+    align-content: flex-end;
+}
+
+.scores-button {
+    display: flex;
+}
