@@ -3,6 +3,7 @@ var startButton = document.querySelector(".start-button");
 var countDownElement = document.querySelector(".count-down");
 var mainDiv = document.querySelector(".main-div")
 var scoresBtn = document.querySelector(".scores-button")
+var result = document.querySelector(".result")
 
 var questions = [
     {
@@ -78,7 +79,7 @@ function askQuestion() {
     // checkAnswer(answerChosen);
 }
 
-//Function to check user answer chosen by user, count, and show result
+//Function to check answer chosen by user, count, and show result
 function checkAnswer() {
     var answerChosen = this.textContent
 
@@ -86,6 +87,7 @@ function checkAnswer() {
         correctAnswerCount++;
         q++;
         quizQuestion = questions[q];
+        result.textContent = "Correct!";
         askQuestion();
     }
     else{
@@ -97,6 +99,7 @@ function checkAnswer() {
         }
         q++;
         quizQuestion = questions[q];
+        result.textContent = "Incorrect :("
         askQuestion();
     }
 
@@ -105,11 +108,12 @@ function checkAnswer() {
 //Function to show quiz score at the end of timer
 function finalScore() {
     alert("Here is your final score: "+ correctAnswerCount)
+    result.textContent = "";
     clearInterval(timer);
     saveScore();
 }
 
-//Function for user input prompt for Initials to save score
+//Function for user input prompt for Initials to save score, and concat info to the score list
 function saveScore() {
     var initials = prompt("Enter your initials to save your score!");
     if(!initials) {
@@ -125,13 +129,13 @@ function saveScore() {
     scoreRecord = scoreRecord.concat(JSON.parse(localStorage.getItem("scoreRecord")||'[]'));
     console.log(scoreRecord)
 
-    localStorage.setItem("scoreRecord", JSON.stringify())
+    localStorage.setItem("scoreRecord", JSON.stringify(scoreRecord))
 
     highScores();
     
 }
 
-//Function to Display Top Scores
+//Function to Display Top Scores, called by saveScore and when the view high scores button is pressed
 function highScores() {
     mainDiv.innerHTML = "<h1>Leaderboard</h1>";
     
